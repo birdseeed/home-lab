@@ -18,6 +18,8 @@ The Proxmox host runs three virtual machines, each with a single job:
 | Home Assistant | Home automation |
 | CI runner | A self hosted, isolated GitHub Actions runner for my own repositories |
 
+The storage pool has no redundancy, and that is a deliberate trade off rather than an oversight. It holds media that can all be downloaded again, so losing a disk costs me time rather than data, and I would rather spend the capacity than mirror something replaceable. The USB C enclosure was chosen for the same reason: it is the cheapest way to add that much capacity to a micro PC, and for this data a disk dropping off the bus is an inconvenience, not a loss.
+
 ## CI runners
 
 A GitHub Actions job runs whatever code is in the workflow, so the Linux runner lives on its own VLAN, tagged through to the Proxmox host, and I tested from inside it that the household and management networks could not be reached. Running my own runners also cut the cost of GitHub hosted minutes.
