@@ -28,7 +28,7 @@ In October 2026 I moved the whole setup from a Windows host, where the disks wer
 
 ## A hardware fault
 
-After the move the host kept losing its network connection while staying up itself. The first problem was simple: the link had negotiated at 100 Mb/s, and replacing the cable brought it back to 1 Gb/s full duplex. The drops carried on, though, and the kernel log showed repeated hardware unit hangs from the Intel I217-LM's e1000e driver, which is a known weakness of that NIC under load with hardware offloads enabled. Turning the offloads off stopped the hangs. I added the change to the interface configuration so it is applied when the bridge comes up, and tested transfers and the services that depend on the pool afterwards; the one thing I have not yet proved is that it holds after a full reboot of the host.
+After the move the host kept losing its network connection while staying up itself. The first problem was simple: the link had negotiated at 100 Mb/s, and replacing the cable brought it back to 1 Gb/s full duplex. The drops carried on, though, and the kernel log showed repeated hardware unit hangs from the Intel I217-LM's e1000e driver, which is a known weakness of that NIC under load with hardware offloads enabled. Turning the offloads off stopped the hangs. I added the change to the interface configuration so it is applied when the bridge comes up, tested transfers and the services that depend on the pool afterwards, and then rebooted the host to confirm the fix survives a restart.
 
 ## CI runners
 
