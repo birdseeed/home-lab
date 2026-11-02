@@ -6,7 +6,7 @@ I have run some form of home lab for most of my career, starting with HP MicroSe
 
 ## The network
 
-The network is UniFi throughout: a UCG Ultra as the gateway and firewall, a USW Lite 8 PoE switch feeding two U7 Lite access points, and a Netgear M4100-26G 24 port managed switch in the rack for wired kit. It is split into five VLANs, for trusted devices and servers, smart home devices, guests, CI runners and AI agent workloads, and every one except the main network is isolated, so it can reach the internet but not the home network or the other VLANs. Where something genuinely needs a path across, such as SSH from my Mac to the CI runner, it gets a firewall rule for that one port rather than a broad exception. The [network notes](docs/network-topology.md) have the detail.
+The network is built on UniFi: a UCG Ultra as the gateway and firewall, a USW Lite 8 PoE switch feeding two U7 Lite access points, and a Netgear M4100-26G 24 port managed switch in the rack for wired kit. It is split into five VLANs, for trusted devices and servers, smart home devices, guests, CI runners and AI agent workloads, and every one except the main network is isolated, so it can reach the internet but not the home network or the other VLANs. Where something genuinely needs a path across, such as SSH from my Mac to the CI runner, it gets a firewall rule for that one port rather than a broad exception. The [network notes](docs/network-topology.md) have the detail.
 
 ## What runs on it
 
