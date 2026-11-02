@@ -40,7 +40,7 @@ Labels alone are not enough to make sure a job lands on the right machine, so ev
 
 ## Local AI
 
-I run local models on an M4 Pro Mac mini with 48 GB of unified memory, using Ollama to serve Qwen. I use it to compare running models locally with paying per token for hosted ones, and to keep work that should not leave the house on my own hardware.
+I run local models on my M4 MacBook Pro, using Ollama to serve Qwen. I use it to compare running models locally with paying per token for hosted ones, and to keep work that should not leave the house on my own hardware.
 
 ## Looking after it
 

@@ -51,8 +51,7 @@
   <path class="line" d="M665 248V350M116 248V300"/>
 
   <!-- Macs -->
-  <rect class="box" x="790" y="300" width="138" height="92" rx="8"/><text class="t" x="859" y="326" text-anchor="middle">Mac mini</text><text class="s" x="859" y="346" text-anchor="middle">M4 Pro, 48 GB</text><text class="s" x="859" y="364" text-anchor="middle">Ollama serving Qwen</text>
-  <rect class="box" x="790" y="408" width="138" height="92" rx="8"/><text class="t" x="859" y="434" text-anchor="middle">MacBook Pro</text><text class="s" x="859" y="454" text-anchor="middle">Parallels macOS</text><text class="s" x="859" y="472" text-anchor="middle">CI and test VMs</text>
+  <rect class="box" x="790" y="300" width="138" height="200" rx="8"/><text class="t" x="859" y="330" text-anchor="middle">MacBook Pro</text><text class="s" x="859" y="352" text-anchor="middle">M4</text><text class="s" x="859" y="390" text-anchor="middle">Parallels macOS</text><text class="s" x="859" y="408" text-anchor="middle">CI and test VMs</text><text class="s" x="859" y="446" text-anchor="middle">Ollama serving</text><text class="s" x="859" y="464" text-anchor="middle">Qwen locally</text>
 
   <text class="s" x="32" y="560">Isolated networks cannot reach Main or each other. Only the specific management access each one needs is allowed through the gateway.</text>
   <text class="s" x="32" y="580">Addresses, rules and hostnames are deliberately left out.</text>
