@@ -1,12 +1,12 @@
 # Home lab
 
-I have run some form of home lab for most of my career, starting with HP MicroServers that had iLO for out of band management, then a Windows host running Hyper-V virtual machines, and now a rack mounted micro PC running Proxmox. It is where I try things before I trust them, and through 2026 it was also the build and test environment for Patched, the products in my [endpoint-assurance](https://github.com/birdseeed/endpoint-assurance) and [macos-updater](https://github.com/birdseeed/macos-updater) repositories.
+I have run some form of home lab for most of my career, starting with HP MicroServers that had iLO for out of band management, then a Windows host running Hyper-V virtual machines, and now an HP micro PC running Proxmox in a wall mounted rack. It is where I try things before I trust them, and through 2026 it was also the build and test environment for Patched, the products in my [endpoint-assurance](https://github.com/birdseeed/endpoint-assurance) and [macos-updater](https://github.com/birdseeed/macos-updater) repositories.
 
 ![Home lab network](assets/network-overview.svg)
 
 ## The network
 
-The network is UniFi throughout: a UCG Ultra as the gateway and firewall, a USW Lite 8 PoE switch and two U7 Lite access points. It is split into five VLANs, for trusted devices and servers, smart home devices, guests, CI runners and AI agent workloads, and every one except the main network is isolated, so it can reach the internet but not the home network or the other VLANs. Where something genuinely needs a path across, such as SSH from my Mac to the CI runner, it gets a firewall rule for that one port rather than a broad exception. The [network notes](docs/network-topology.md) have the detail.
+The network is UniFi throughout: a UCG Ultra as the gateway and firewall, a USW Lite 8 PoE switch feeding two U7 Lite access points, and a Netgear M4100-26G 24 port managed switch in the rack for wired kit. It is split into five VLANs, for trusted devices and servers, smart home devices, guests, CI runners and AI agent workloads, and every one except the main network is isolated, so it can reach the internet but not the home network or the other VLANs. Where something genuinely needs a path across, such as SSH from my Mac to the CI runner, it gets a firewall rule for that one port rather than a broad exception. The [network notes](docs/network-topology.md) have the detail.
 
 ## What runs on it
 
@@ -14,7 +14,7 @@ The Proxmox host runs three virtual machines, each with a single job:
 
 | Virtual machine | What it does |
 | --- | --- |
-| Storage | A four disk pool of about 28 TB shared over SMB, plus Docker services including media and the dashboards displayed around the house |
+| Storage | Four disks of about 28 TB in total, in a USB C enclosure attached to the host and shared over SMB, plus Docker services including media and the dashboards displayed around the house |
 | Home Assistant | Home automation |
 | CI runner | A self hosted, isolated GitHub Actions runner for my own repositories |
 

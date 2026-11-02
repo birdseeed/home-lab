@@ -2,7 +2,7 @@
 
 ![Home lab network](../assets/network-overview.svg)
 
-The network runs on UniFi: a UCG Ultra as the gateway and firewall, a USW Lite 8 PoE switch, and two U7 Lite access points. It is split into five networks, each on its own VLAN:
+The network runs on UniFi: a UCG Ultra as the gateway and firewall, a USW Lite 8 PoE switch feeding two U7 Lite access points, and a Netgear M4100-26G 24 port managed switch in the rack for wired kit. It is split into five networks, each on its own VLAN:
 
 | Network | VLAN | Purpose | Isolated |
 | --- | ---: | --- | --- |
@@ -16,6 +16,6 @@ Everything except Main has UniFi network isolation turned on, so those networks 
 
 The CI runner is the most important boundary. A GitHub Actions job runs whatever code is in the workflow, so the runner lives on its own VLAN, tagged through to the Proxmox host, and I tested from inside the runner that the household and management networks could not be reached.
 
-The Proxmox host runs three virtual machines: storage, with a four disk pool of about 28 TB, SMB shares and Docker services; Home Assistant; and the Linux CI runner. The macOS CI and test virtual machines ran under Parallels on my MacBook Pro, and the Mac mini runs local models with Ollama.
+The Proxmox host is an HP micro PC running three virtual machines: storage, with four disks of about 28 TB in total in a USB C enclosure, SMB shares and Docker services; Home Assistant; and the Linux CI runner. The macOS CI and test virtual machines ran under Parallels on my MacBook Pro, and the Mac mini runs local models with Ollama.
 
 Addresses, subnets, hostnames and the full firewall rule set are deliberately left out of this repository.
