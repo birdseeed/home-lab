@@ -1,6 +1,6 @@
 # Home lab
 
-I have run some form of home lab for most of my career, starting with HP MicroServers that had iLO for out of band management, then a Windows host running Hyper-V virtual machines, and now an HP micro PC running Proxmox in a wall mounted rack. It is where I try things before I trust them, and through 2026 it was also the build and test environment for Patched, the products in my [endpoint-assurance](https://github.com/birdseeed/endpoint-assurance) and [macos-updater](https://github.com/birdseeed/macos-updater) repositories.
+I have run some form of home lab for most of my career, starting with HP MicroServers that had iLO for out of band management, then a Windows host running Hyper-V virtual machines, and now an HP ProDesk 600 G1 Desktop Mini running Proxmox in a wall mounted rack. It is where I try things before I trust them, and through 2026 it was also the build and test environment for Patched, the products in my [endpoint-assurance](https://github.com/birdseeed/endpoint-assurance) and [macos-updater](https://github.com/birdseeed/macos-updater) repositories.
 
 ![Home lab network](assets/network-overview.svg)
 
@@ -14,11 +14,21 @@ The Proxmox host runs three virtual machines, each with a single job:
 
 | Virtual machine | What it does |
 | --- | --- |
-| Storage | Four disks of about 28 TB in total, in a USB C enclosure attached to the host and shared over SMB, plus Docker services including media and the dashboards displayed around the house |
+| Storage | A pool of about 28 TB shared over SMB, plus Docker services including media and the dashboards displayed around the house |
 | Home Assistant | Home automation |
 | CI runner | A self hosted, isolated GitHub Actions runner for my own repositories |
 
-The storage pool has no redundancy, and that is a deliberate trade off rather than an oversight. It holds media that can all be downloaded again, so losing a disk costs me time rather than data, and I would rather spend the capacity than mirror something replaceable. The USB C enclosure was chosen for the same reason: it is the cheapest way to add that much capacity to a micro PC, and for this data a disk dropping off the bus is an inconvenience, not a loss.
+The storage is four mismatched disks, a 12 TB Seagate IronWolf, a 10 TB Toshiba, a 3 TB Seagate and a 3 TB WD Red, in an external USB C enclosure. Proxmox passes the physical disks straight through to the Storage VM, which mounts each one and combines them into a single pool with mergerfs. Before any service that depends on the pool starts, a mount guard checks it is looking at the right disk and partition, so a disk that comes back under a different device name cannot quietly leave a service writing into an empty folder.
+
+The pool has no redundancy, and that is a deliberate trade off rather than an oversight. It holds media that can all be downloaded again, so losing a disk costs me time rather than data, and I would rather spend the capacity than mirror something replaceable. The USB C enclosure was chosen for the same reason: it is the cheapest way to add that much capacity to a micro PC, and for this data a disk dropping off the bus is an inconvenience, not a loss. The passed through disks are excluded from the VM backups for the same reason.
+
+## Moving off Windows
+
+In October 2026 I moved the whole setup from a Windows host, where the disks were pooled with StableBit DrivePool and the other services ran under Hyper-V, onto Proxmox. Rather than copying everything off and reformatting, I kept the existing NTFS filesystems and their data in place and built the mergerfs pool over the top of them. I kept the original Windows backups, application exports and cold exports of the old virtual machines through the migration, and added the fourth disk to the pool once the first three were settled.
+
+## A hardware fault
+
+After the move the host kept losing its network connection while staying up itself. The first problem was simple: the link had negotiated at 100 Mb/s, and replacing the cable brought it back to 1 Gb/s full duplex. The drops carried on, though, and the kernel log showed repeated hardware unit hangs from the Intel I217-LM's e1000e driver, which is a known weakness of that NIC under load with hardware offloads enabled. Turning the offloads off stopped the hangs. I added the change to the interface configuration so it is applied when the bridge comes up, and tested transfers and the services that depend on the pool afterwards; the one thing I have not yet proved is that it holds after a full reboot of the host.
 
 ## CI runners
 

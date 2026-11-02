@@ -44,8 +44,8 @@
 
   <!-- Proxmox host -->
   <rect class="host" x="32" y="300" width="736" height="200" rx="12"/>
-  <text class="t" x="52" y="328">Proxmox VE host · HP micro PC in the rack</text>
-  <rect class="box" x="52" y="350" width="220" height="120" rx="8"/><text class="t" x="162" y="378" text-anchor="middle">Storage VM</text><text class="s" x="162" y="400" text-anchor="middle">Four disks, about 28 TB</text><text class="s" x="162" y="419" text-anchor="middle">USB C enclosure, SMB shares</text><text class="s" x="162" y="438" text-anchor="middle">Docker services, dashboards</text><text class="opent" x="162" y="458" text-anchor="middle">Main</text>
+  <text class="t" x="52" y="328">Proxmox VE host · HP ProDesk 600 G1 Mini</text>
+  <rect class="box" x="52" y="350" width="220" height="120" rx="8"/><text class="t" x="162" y="378" text-anchor="middle">Storage VM</text><text class="s" x="162" y="400" text-anchor="middle">Four disks passed through</text><text class="s" x="162" y="419" text-anchor="middle">mergerfs pool, about 28 TB</text><text class="s" x="162" y="438" text-anchor="middle">SMB, Docker, dashboards</text><text class="opent" x="162" y="458" text-anchor="middle">Main</text>
   <rect class="box" x="290" y="350" width="220" height="120" rx="8"/><text class="t" x="400" y="378" text-anchor="middle">Home Assistant VM</text><text class="s" x="400" y="400" text-anchor="middle">Home automation</text><text class="opent" x="400" y="458" text-anchor="middle">Main</text>
   <rect class="iso" x="528" y="350" width="220" height="120" rx="8"/><text class="t" x="638" y="378" text-anchor="middle">CI runner VM</text><text class="s" x="638" y="400" text-anchor="middle">Self hosted GitHub Actions</text><text class="s" x="638" y="419" text-anchor="middle">Linux runner</text><text class="isot" x="638" y="458" text-anchor="middle">VLAN 7 · isolated</text>
   <path class="line" d="M665 248V350M116 248V300"/>
